@@ -1,0 +1,79 @@
+[NEAT]
+fitness_criterion                  = max    #to determine best birds
+fitness_threshold                  = 100    #fitness goal, if reached no more generations are created
+pop_size                           = 100    #population size for each generation
+reset_on_extinction                = False  #don't reset population on simultaneous extinction of all species
+
+[DefaultGenome] #population members (birds) are called genomes, they have nodes (input and output neurons) and genes (connections, weights)
+# node activation options
+activation_default                 = tanh   #activation function
+activation_mutate_rate             = 0.0    #rate at which the activation function will be randomly changed based on activation options
+activation_options                 = tanh   #options to choose from as activation functions
+
+# node aggregation options
+aggregation_default                = sum
+aggregation_mutate_rate            = 0.0
+aggregation_options                = sum
+
+# node bias options #initial connections and how likely they'll change
+bias_init_mean                     = 0.0
+bias_init_stdev                    = 1.0
+bias_max_value                     = 30.0
+bias_min_value                     = -30.0
+bias_mutate_power                  = 0.5
+bias_mutate_rate                   = 0.7    #70% rate of bias mutation
+bias_replace_rate                  = 0.1
+
+# genome compatibility options
+compatibility_disjoint_coefficient = 1.0
+compatibility_weight_coefficient   = 0.5
+
+# connection add/remove rates #how likely it is to add or remove a new connection (50%)
+conn_add_prob                      = 0.5
+conn_delete_prob                   = 0.5
+
+# connection enable options #there can be connections that sometimes are enabled and sometimes not enabled
+enabled_default                    = True   #by default are all enabled
+enabled_mutate_rate                = 0.01   #10% chance a connection is disabled
+
+feed_forward                       = True
+initial_connection                 = full   #fully connected layers to start
+
+# node add/remove rates #how likely it is to add or remove a new node (20%)
+node_add_prob                      = 0.2
+node_delete_prob                   = 0.2
+
+# network parameters #neurons structure to start
+num_hidden                         = 0
+num_inputs                         = 3
+num_outputs                        = 1
+
+# node response options
+response_init_mean                 = 1.0
+response_init_stdev                = 0.0
+response_max_value                 = 30.0
+response_min_value                 = -30.0
+response_mutate_power              = 0.0
+response_mutate_rate               = 0.0
+response_replace_rate              = 0.0
+
+# connection weight options
+weight_init_mean                   = 0.0
+weight_init_stdev                  = 1.0
+weight_max_value                   = 30.0
+weight_min_value                   = -30.0
+weight_mutate_power                = 0.5
+weight_mutate_rate                 = 0.8
+weight_replace_rate                = 0.1
+
+[DefaultSpeciesSet]
+compatibility_threshold            = 3.0
+
+[DefaultStagnation]
+species_fitness_func               = max
+max_stagnation                     = 20     #max generations without increasing fitness, no more generations if reached
+species_elitism                    = 2      #species are the different types of birds based on the NN architecture
+
+[DefaultReproduction]
+elitism                            = 2
+survival_threshold                 = 0.2

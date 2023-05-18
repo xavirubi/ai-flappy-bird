@@ -1,0 +1,71 @@
+Basically a neural network is made of an input layer, an output layer, connections
+and weights. More layers, neurons, connections and weights are added if needed.
+
+In this case, the neural networks will have an input layer with three neurons:
+- bird position
+- top pipe position
+- bottom pipe position
+and an output layer with one neuron:
+- jump or don't jump
+
+Each input neuron has a value and is connected to the output neuron with one
+connection. Each connection has a weight, which is a number that represents
+how strong or weak the connection is. The weights are numbers that are going
+to randomly change (not completely, little variations) every time a new NN is
+created until it reaches one that works well.
+
+So we pass values to the input neurons and then feed the values through
+the NN (feed-forward neural network), they're going to have a weight applied to
+them and they're going to be passed to the output neuron as a weighted sum.
+For the weighted sum we multiply each weight by its corresponding input value.
+Then we apply a bias to the sum result.
+A bias is a constant added to the product of features (values of the input
+neurons) and weights. It's used to offset the result as it helps the model to
+shift the activation function towards the positive or negative side.
+
+Finally, we are going to apply an activation function to the result. The
+activation function allows us to get the value for the output neuron between
+two set numbers. This is really useful as we can check which number is closer
+so we know whether to jump or not.
+In this case, the activation function TanH will be used. It compresses any
+given value between -1 and 1.
+
+
+In this project the genetic algorithm called NeuroEvolution of Augmenting
+Topologies (NEAT) will be used to generate the weights and biases. It emulates
+natural selection.
+
+At first we have no idea of the correct weights and biases, so we start by
+creating a population of N individuals (birds). Each individual is controlled by
+a neural network that starts with random weights and biases. Then we are going
+to test all this individuals on the game and see how they perform (evaluate
+fitness). When all of them die, another generation is created. For the new
+generation we pick the birds with best fitness score from the last generation,
+breed them and mutate them to create a brand new population of N new birds. Now
+we have offspring from the latest best birds and these birds should perform better
+than the previous generation as they come from the best of that generation.
+So after a few generations the AI starts to get exponentially better until eventually
+it reaches a point where it doesn't fail and can keep going infinitely without
+hitting a pipe.
+
+Fitness is the metric that tells how well the NN has performed and will be different
+depending on the game or task. In this case, the way we will determine how well a bird
+did is how far it progressed.
+
+
+For the neural network and NEAT algorithm we choose:
+- Inputs: bird y, top pipe position, bottom pipe position
+- Outputs: jump or don't jump
+- Activation function: TanH
+- Population size: 100
+- Fitness function: max distance
+- Max generations: 30
+
+How well we choose the parameters will directly affect how well the AI algorithm
+performs. For instance, a good NN won't be reached if it doesn't have the correct
+information (inputs) or you're evaluating based on a wrong parameter and not
+choosing the really best individuals to make the next generation (fitness function).
+
+As there are different activation functions, we choose the one for the output
+neuron, but the algorithm will select the activation function for any other hidden
+neuron.
